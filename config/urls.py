@@ -17,7 +17,13 @@ urlpatterns = [
     # User management
     path(
         "users/",
-        include("zetagram.users.urls", namespace="users"),
+        include("zetagram.users.urls"),
+        name="users",
+    ),
+    path(
+        "images/",
+        include("zetagram.images.urls")
+        , name="images",
     ),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
