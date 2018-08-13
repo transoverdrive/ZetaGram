@@ -1,0 +1,27 @@
+from django.db import models
+from . import Owner
+
+class Cat(models.Model):
+    name = models.CharField(max_length=30)
+    breed = models.CharField(max_length=20)
+    grumpy = models.BooleanField(default=False)
+    owner = models.ForeignKey(Owner, null=True)
+
+class Owner(models.Model):
+    name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    following = models.ManyToManyField('self')
+    followers = models.ManyToManyField('self')
+
+nicolas = Owner.objects.create(
+    name='Kyung Jong'
+    last_name='Oh'
+    age=38
+)
+
+bunns = Cat.objects.get(id=1)
+bunns.owner = nicolas
+bunns.save
+
+
